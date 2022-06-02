@@ -3,7 +3,7 @@ import Pipe from "@makechtec/pipe/pipe.js";
 import BlockExtractor from "@makechtec/tezcatl-blocks";
 import { cwd } from "node:process";
 
-export const Default = {
+export const DefaultCLI = {
     run: function() {
 
         let template = CLI.getArgumentValue("name");
