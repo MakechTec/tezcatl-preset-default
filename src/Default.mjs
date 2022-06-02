@@ -1,30 +1,16 @@
 import CLI, {Reader, Writter} from "@makechtec/tezcatl-cli";
 import Pipe from "@makechtec/pipe/pipe.js";
 import BlockExtractor from "@makechtec/tezcatl-blocks";
+import { cwd } from "node:process";
 
 export const Default = {
     run: function() {
 
-        if(CLI.isFlag("test")){
-            let content = Reader.readTemplate("foreach");
-            let p = new Pipe(content);
-            let filename = "test.js";
-
-            p.addAction((content) => {
-                return BlockExtractor.processIterations(content);
-            })
-            .addAction((content, filename) => {
-                return Writter.writeFile(filename, content);
-            }, filename);
-    
-            p.execActions();
-            return;
-        }
-
         let template = CLI.getArgumentValue("name");
         let placeholders = CLI.getArgumentsGroup("ph");
         let file = CLI.getArgumentValue("file");
-        let content = Reader.readTemplate(template.value);
+        let content = this.readContent(template.value);
+
         let p = new Pipe(content);
 
         p.addAction((content) => {
@@ -38,7 +24,20 @@ export const Default = {
         }, file.value);
 
         p.execActions();
+    },
+
+    readContent: (templateName) => {
+        let userTemplatePath = USER_TEMPLATE_DIR + "/" + templateName;
+        let defaultTemplatePath = DEFAULT_TEMPLATE_DIR + "/" + templateName;
+        let content = Reader.readTemplate(userTemplatePath);
+
+        if(content == ""){
+            content = Reader.readTemplate(defaultTemplatePath);
+        }
+
+        return content;
     }
 };
 
 export default Default;
+

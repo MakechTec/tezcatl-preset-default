@@ -27,6 +27,6 @@
   "dependencies": {
     "@makechtec/pipe": "^1.0.1",
     "@makechtec/tezcatl-blocks": "^1.0.1",
-    "@makechtec/tezcatl-cli": "^1.0.1"
+    "@makechtec/tezcatl-cli": "^1.0.2"
   }
 }
