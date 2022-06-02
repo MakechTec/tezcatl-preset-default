@@ -39,5 +39,3 @@ export const DefaultCLI = {
     }
 };
 
-export default Default;
-

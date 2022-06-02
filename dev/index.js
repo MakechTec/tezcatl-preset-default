@@ -1,7 +1,7 @@
 const concat = require('concat-files');
  
   concat([
-    "./src/Default.mjs",
+    "./src/DefaultCLI.mjs",
     "./src/constants.mjs",
   ], "./prebuild/default.mjs", function(err) {
     if (err) throw err
