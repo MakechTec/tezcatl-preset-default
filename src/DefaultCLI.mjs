@@ -1,6 +1,6 @@
-import CLI, {Reader, Writter} from "@makechtec/tezcatl-cli";
-import Pipe from "@makechtec/pipe/pipe.js";
-import BlockExtractor from "@makechtec/tezcatl-blocks";
+import {CLI,Reader, Writter} from "@makechtec/tezcatl-cli";
+import {Pipe} from "@makechtec/pipe";
+import {BlockExtractor} from "@makechtec/tezcatl-blocks";
 import { cwd } from "node:process";
 
 export const DefaultCLI = {
@@ -9,8 +9,7 @@ export const DefaultCLI = {
         let template = CLI.getArgumentValue("name");
         let placeholders = CLI.getArgumentsGroup("ph");
         let file = CLI.getArgumentValue("file");
-        let content = this.readContent(template.value);
-
+        let content = this.readContent(template.value + EXT);
         let p = new Pipe(content);
 
         p.addAction((content) => {
@@ -34,7 +33,6 @@ export const DefaultCLI = {
         if(content == ""){
             content = Reader.readTemplate(defaultTemplatePath);
         }
-
         return content;
     }
 };

@@ -1,8 +1,11 @@
 {
   "name": "@makechtec/tezcatl-default",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "tezcatl-test": "bin/index.mjs"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,8 +28,8 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "@makechtec/pipe": "^1.0.1",
+    "@makechtec/pipe": "^1.0.2",
     "@makechtec/tezcatl-blocks": "^1.0.1",
-    "@makechtec/tezcatl-cli": "^1.0.2"
+    "@makechtec/tezcatl-cli": "^1.0.3"
   }
 }
