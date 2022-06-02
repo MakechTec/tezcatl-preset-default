@@ -1,6 +1,6 @@
 import CLI, {Reader, Writter} from "@makechtec/tezcatl-cli";
-import Pipe from "@makechtec/pipe/pipe";
-import BlockExtractor from "../src/blocks/BlockExtractor.mjs";
+import Pipe from "@makechtec/pipe/pipe.js";
+import BlockExtractor from "@makechtec/tezcatl-blocks";
 
 export const Default = {
     run: function() {

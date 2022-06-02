@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: "./prebuild/cli.mjs",
+    entry: "./prebuild/default.mjs",
     output: {
         path: path.resolve(__dirname),
         filename: "index.js",
