@@ -2,4 +2,4 @@
 
 node dev/index.js
 webpack
-tezcatl-test name=jscomponent phcomponent=Test import1=react --class file=Test.js
+node test/index.mjs template=jscomponent file=test/J.js --class const1=Navbar func1=toggle component=App

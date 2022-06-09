@@ -1,6 +1,6 @@
 @foreach(import)
 import ${import} from '';
-@endif
+@endforeach
 
 @if(class)
 export default class ${component}{
@@ -22,12 +22,8 @@ export default ${component};
 @endif
 
 @foreach(const)
-export const ${const} = () => {
-	return (
-		<div>
-			<h1>${const}</h1>
-		</div>
-	);
+export const ${const} = {
+	name: "m",
 };
 @endforeach
 

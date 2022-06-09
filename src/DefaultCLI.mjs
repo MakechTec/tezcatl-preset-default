@@ -1,39 +1,48 @@
 import {CLI,Reader, Writter} from "@makechtec/tezcatl-cli";
 import {Pipe} from "@makechtec/pipe";
-import {BlockExtractor} from "@makechtec/tezcatl-blocks";
 import { cwd } from "node:process";
+import { ConditionalProcessor } from "@makechtec/tezcatl-conditional-processor";
+import { IterativeProcessor } from "@makechtec/tezcatl-iterative-processor";
 
-export const DefaultCLI = {
-    run: function() {
+export const run = () => {
 
-        let template = CLI.getArgumentValue("name");
-        let placeholders = CLI.getArgumentsGroup("ph");
-        let file = CLI.getArgumentValue("file");
-        let content = this.readContent(template.value + EXT);
-        let p = new Pipe(content);
+    let template = CLI.getArgumentValue("template");
+    let file = CLI.getArgumentValue("file");
+    let placeholders = CLI.getAllArguments();
+    let content = readContent(template.value + EXT);
 
-        p.addAction((content) => {
-            return BlockExtractor.processConditions(content);
+    let pipe = new Pipe(content);
+    let conditionalProcessor = new ConditionalProcessor();
+    let iterativeProcessor = new IterativeProcessor();
+
+
+
+    pipe.addAction((newContent) => {
+            return conditionalProcessor.parse(newContent);
         })
-        .addAction((content, placeholders) => {
-            return Reader.changePlaceholders(content, placeholders);
-        }, placeholders)
-        .addAction((content, filename) => {
-            return Writter.writeFile(filename, content);
-        }, file.value);
-
-        p.execActions();
-    },
-
-    readContent: (templateName) => {
-        let userTemplatePath = USER_TEMPLATE_DIR + "/" + templateName;
-        let defaultTemplatePath = DEFAULT_TEMPLATE_DIR + "/" + templateName;
-        let content = Reader.readTemplate(userTemplatePath);
-
-        if(content == ""){
-            content = Reader.readTemplate(defaultTemplatePath);
-        }
-        return content;
-    }
+        .addAction((newContent) => {
+            return iterativeProcessor.parse(newContent);
+        })
+        .addAction((newContent) => {
+            return Reader.changePlaceholders(newContent, placeholders);
+        })
+        .addAction((newContent) => {
+            Writter.writeFile(file.value, newContent);
+        })
+        .execActions();
 };
 
+export const readContent = (templateName) => {
+    let userTemplatePath = USER_TEMPLATE_DIR + "/" + templateName;
+    let defaultTemplatePath = DEFAULT_TEMPLATE_DIR + "/" + templateName;
+    let content = Reader.readTemplate(userTemplatePath);
+
+    if(content == ""){
+        content = Reader.readTemplate(defaultTemplatePath);
+    }
+    return content;
+};
+
+export const USER_TEMPLATE_DIR = cwd() + "/templates";
+export const DEFAULT_TEMPLATE_DIR = cwd() + "/node_modules/@makechtec/tezcatl-preset-default/templates";
+export const EXT = ".temp";
