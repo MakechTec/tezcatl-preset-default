@@ -1,5 +1,5 @@
 {
-  "name": "@makechtec/tezcatl-default",
+  "name": "@makechtec/tezcatl-preset-default",
   "version": "1.0.4",
   "description": "",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angeldomp49/tezcatl-default.git"
+    "url": "git+https://github.com/angeldomp49/tezcatl-preset-default.git"
   },
   "author": "makechtec",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/angeldomp49/tezcatl-default/issues"
+    "url": "https://github.com/angeldomp49/tezcatl-preset-default/issues"
   },
-  "homepage": "https://github.com/angeldomp49/tezcatl-default#readme",
+  "homepage": "https://github.com/angeldomp49/tezcatl-preset-default#readme",
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.17.12",
     "@babel/preset-env": "^7.18.2",
