@@ -3,13 +3,14 @@ import {Pipe} from "@makechtec/pipe";
 import { cwd } from "node:process";
 import { ConditionalProcessor } from "@makechtec/tezcatl-conditional-processor";
 import { IterativeProcessor } from "@makechtec/tezcatl-iterative-processor";
+import { TEMPLATE_EXTENSION } from "@makechtec/tezcatl-constants";
 
 export const run = () => {
 
     let template = CLI.getArgumentValue("template");
     let file = CLI.getArgumentValue("file");
     let placeholders = CLI.getAllArguments();
-    let content = readContent(template.value + EXT);
+    let content = readContent(template.value + TEMPLATE_EXTENSION);
 
     let pipe = new Pipe(content);
     let conditionalProcessor = new ConditionalProcessor();
@@ -45,4 +46,3 @@ export const readContent = (templateName) => {
 
 export const USER_TEMPLATE_DIR = cwd() + "/templates";
 export const DEFAULT_TEMPLATE_DIR = cwd() + "/node_modules/@makechtec/tezcatl-preset-default/templates";
-export const EXT = ".temp";
